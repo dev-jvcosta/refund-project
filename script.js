@@ -181,10 +181,16 @@ function updateTotals() {
 }
 
 // Captura o evento de click para remover o item da lista
-
 expenseList.addEventListener("click", (event) => {
   // Verifica se o elemento clicado é o ícone de remover
   if(event.target.classList.contains("remove-icon")){
-    console.log("event");
+    // Obtem a (li) pai do elemento clicado, 
+    const item = event.target.closest(".expense"); //closest pega o pai mais próximo do elemento clicado
+
+    // remove o item da lista
+    item.remove();
   }
+
+  // Atualiza os totais após remover o item
+  updateTotals();
 });
