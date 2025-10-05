@@ -129,6 +129,7 @@ function expenseAdd(newExpense) {
   }
 }
 
+// Atualiza totais
 function updateTotals() {
   try {
     // Recupera todos os items (li) da lista (ul)
@@ -178,3 +179,12 @@ function updateTotals() {
     alert("An error occurred while updating totals.");
   }
 }
+
+// Captura o evento de click para remover o item da lista
+
+expenseList.addEventListener("click", (event) => {
+  // Verifica se o elemento clicado é o ícone de remover
+  if(event.target.classList.contains("remove-icon")){
+    console.log("event");
+  }
+});
