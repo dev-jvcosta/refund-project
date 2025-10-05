@@ -61,20 +61,47 @@ form.onsubmit = (event) => {
 
 function expenseAdd(newExpense){
   try{
-    // #01 -Cria o elemento para adicionar o item (li) na lista (ul)
+    // Cria o elemento para adicionar o item (li) na lista (ul)
     const expenseItem = document.createElement("li");
     expenseItem.classList.add("expense");
 
-    // #02 - Cria o ícone da categoria
+
+    // Cria o ícone da categoria
     const expenseIcon = document.createElement("img");
     expenseIcon.setAttribute("src", `./img/${newExpense.category_id}.svg`);
     expenseIcon.setAttribute("alt", newExpense.category_name);
 
-    // #03 - Adiciona as informações no item
-    expenseItem.append(expenseIcon);
 
-    // #04 - Adiciona o item na lista
-    expenseItem.append(expenseList);
+    // Cria o elemento para adicionar as informações do item
+    const expenseInfo = document.createElement("div");
+    expenseInfo.classList.add("expense-info");
+
+
+    // Cria o nome da despesa
+    const expenseName = document.createElement("strong");
+    expenseName.textContent = newExpense.expense; 
+
+    // Cria a categoria da despesa
+    const expenseCategory = document.createElement("span");
+    expenseCategory.textConetent = newExpense.category_name;
+
+    // Cria o valor da despesa
+    const expenseAmount = document.createElement("span");
+    expenseAmount.classList.add("expense-amount");
+
+    //adiciona o valor da despesa com o small para formatar o valor e remove o R$ do valor
+    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.toUpperCase().replace("R$", "")}`;
+
+
+    // Adiciona o nome e a categoria na div das informações do item
+    expenseInfo.append(expenseName, expenseCategory);
+
+
+    // Adiciona as informações no item
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount);
+
+    // Adiciona o item na lista
+    expenseList.append(expenseItem);
 
 
   } catch (error){
