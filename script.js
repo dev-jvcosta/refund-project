@@ -1,5 +1,8 @@
 // Seleciona os elementos do formuláro.
+const form = document.querySelector("form");
 const amount = document.getElementById("amount");
+const expense = document.getElementById("expense");
+const category = document.getElementById("category");
 
 /**
  * Evento: .oninput()
@@ -22,11 +25,17 @@ amount.oninput = () => {
 };
 
 function formatCurrencyBRL(value){
+
+  //Formata o valor no padrão brasileiro
   value = value.toLocaleString("pt-BR", {
-    //Formata o valor no padrão brasileiro
     style: "currency", //mooeda
     currency: "BRL" // formato da moeda
   });
+
   //retorna o valor formatado
   return value;
+}
+
+form.onsubmit = (event) => {
+  event.preventDefault();
 }
