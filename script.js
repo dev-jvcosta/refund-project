@@ -15,7 +15,7 @@ const expenseList = document.querySelector("ul");
 
 // Captura o evento de input para formatar o valor
 amount.oninput = () => {
-  
+
   // Obtém o valor atual do input e remove os caracteres não numéricos
   let value = amount.value.replace(/\D/g, "");
 
@@ -23,12 +23,12 @@ amount.oninput = () => {
   value = Number(value) / 100;
 
   // Atualiza o valor do input com o valor formatado
-  amount.value = formatCurrencyBRL(value); 
+  amount.value = formatCurrencyBRL(value);
 
- 
+
 };
 
-function formatCurrencyBRL(value){
+function formatCurrencyBRL(value) {
 
   //Formata o valor no padrão brasileiro
   value = value.toLocaleString("pt-BR", {
@@ -59,27 +59,32 @@ form.onsubmit = (event) => {
   expenseAdd(newExpense);
 }
 
-function expenseAdd(newExpense){
-  try{
+function expenseAdd(newExpense) {
+  try {
+    // ----------- AREA DE CRIAÇÃO DOS ELEMENTOS -----------
+
     // Cria o elemento para adicionar o item (li) na lista (ul)
     const expenseItem = document.createElement("li");
     expenseItem.classList.add("expense");
-
 
     // Cria o ícone da categoria
     const expenseIcon = document.createElement("img");
     expenseIcon.setAttribute("src", `./img/${newExpense.category_id}.svg`);
     expenseIcon.setAttribute("alt", newExpense.category_name);
 
+    // Cria o icone de remover
+    const removeIcon = document.createElement("img");
+    removeIcon.classList.add("remove-icon");
+    removeIcon.setAttribute("src", "img/remove.svg");
+    removeIcon.setAttribute("alt", "remover");
 
     // Cria o elemento para adicionar as informações do item
     const expenseInfo = document.createElement("div");
     expenseInfo.classList.add("expense-info");
 
-
     // Cria o nome da despesa
     const expenseName = document.createElement("strong");
-    expenseName.textContent = newExpense.expense; 
+    expenseName.textContent = newExpense.expense;
 
     // Cria a categoria da despesa
     const expenseCategory = document.createElement("span");
@@ -88,6 +93,13 @@ function expenseAdd(newExpense){
     // Cria o valor da despesa
     const expenseAmount = document.createElement("span");
     expenseAmount.classList.add("expense-amount");
+
+
+
+    // ------------------------------------------
+
+
+    // ----------- AREA PARA ADICIONAR ELEMENTOS -----------
 
     //adiciona o valor da despesa com o small para formatar o valor e remove o R$ do valor
     expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.toUpperCase().replace("R$", "")}`;
@@ -98,13 +110,15 @@ function expenseAdd(newExpense){
 
 
     // Adiciona as informações no item
-    expenseItem.append(expenseIcon, expenseInfo, expenseAmount);
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon);
 
     // Adiciona o item na lista
     expenseList.append(expenseItem);
 
+    // ------------------------------------------
 
-  } catch (error){
+
+  } catch (error) {
     alert("Não foi possível adicionar a lista despesa");
     console.error(error);
   }
